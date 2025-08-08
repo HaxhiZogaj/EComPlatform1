@@ -1,0 +1,6 @@
+@EComPlatform_HostAddress = http://localhost:5170
+
+GET {{EComPlatform_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
