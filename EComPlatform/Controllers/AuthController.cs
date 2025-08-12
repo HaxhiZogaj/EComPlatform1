@@ -1,5 +1,7 @@
 ﻿using EComPlatform.DTOs;
+using EComPlatform.Models;
 using EComPlatform.Repository.Interface.EComPlatform.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -7,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 public class AuthController : ControllerBase
 {
     private readonly IAuthRepository _authRepo;
-
     public AuthController(IAuthRepository authRepo)
     {
         _authRepo = authRepo;
@@ -20,10 +21,27 @@ public class AuthController : ControllerBase
         return result.IsSuccess ? Ok(result) : BadRequest(result);
     }
 
+    //[HttpPost("login")]
+    //public async Task<IActionResult> Login(LoginDto dto)
+    //{
+    //    var result = await _authRepo.LoginAsync(dto);
+    //    return result.IsSuccess ? Ok(result) : Unauthorized(result);
+    //}
+
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginDto dto)
     {
         var result = await _authRepo.LoginAsync(dto);
-        return result.IsSuccess ? Ok(result) : Unauthorized(result);
+        if (!result.IsSuccess)
+        {
+            return BadRequest(new
+            {
+                Errors = result.Errors
+            });
+        }
+        return Ok(result);
     }
+
+
+
 }

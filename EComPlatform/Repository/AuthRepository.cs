@@ -1,5 +1,4 @@
-﻿// Repositories/AuthRepository.cs
-using EComPlatform.DTOs;
+﻿using EComPlatform.DTOs;
 using EComPlatform.Helpers;
 using EComPlatform.Models;
 using EComPlatform.Repository.Interface.EComPlatform.Interfaces;
@@ -31,7 +30,7 @@ namespace EComPlatform.Repositories
         {
             var user = new AppUser
             {
-                UserName = model.Email,
+                UserName = model.Email,  // separate from email now
                 Email = model.Email,
                 FullName = model.FullName
             };
@@ -46,6 +45,7 @@ namespace EComPlatform.Repositories
                 };
             }
 
+            // Add default role
             await _userManager.AddToRoleAsync(user, "Customer");
 
             var token = await GenerateToken(user);
@@ -54,9 +54,16 @@ namespace EComPlatform.Repositories
 
         public async Task<AuthResponseDto> LoginAsync(LoginDto model)
         {
+            // Find by email
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null || !await _userManager.CheckPasswordAsync(user, model.Password))
-                return new AuthResponseDto { IsSuccess = false, Errors = new[] { "Invalid credentials." } };
+            {
+                return new AuthResponseDto
+                {
+                    IsSuccess = false,
+                    Errors = new[] { "Invalid credentials." }
+                };
+            }
 
             var token = await GenerateToken(user);
             return new AuthResponseDto { IsSuccess = true, Token = token };
@@ -66,6 +73,7 @@ namespace EComPlatform.Repositories
         {
             var user = await _userManager.FindByEmailAsync(email);
             if (user == null) return false;
+
             if (!await _roleManager.RoleExistsAsync(role))
                 await _roleManager.CreateAsync(new IdentityRole(role));
 
@@ -78,25 +86,22 @@ namespace EComPlatform.Repositories
             var authClaims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
-                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Name, user.UserName ?? ""), // Username claim
+                new Claim(ClaimTypes.Email, user.Email ?? ""),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
             var userRoles = await _userManager.GetRolesAsync(user);
             authClaims.AddRange(userRoles.Select(role => new Claim(ClaimTypes.Role, role)));
 
-            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:Key"]));
-
-            var token = JwtHelper.GenerateToken(
-                 _config["JWT:Key"],
-                 _config["JWT:Issuer"],
-                 _config["JWT:Audience"],
-                 Convert.ToDouble(_config["JWT:DurationInMinutes"]),
-                 authClaims
-              );
-
-
-            return token;
+            return JwtHelper.GenerateToken(
+                _config["JWT:Key"],
+                _config["JWT:Issuer"],
+                _config["JWT:Audience"],
+                Convert.ToDouble(_config["JWT:DurationInMinutes"]),
+                authClaims
+            );
         }
     }
 }
+

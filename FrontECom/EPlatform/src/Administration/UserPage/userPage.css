@@ -1,0 +1,75 @@
+.users-container {
+  display: flex;
+  max-width: 800px;
+  margin: 30px auto;
+  font-family: Arial, sans-serif;
+  gap: 30px;
+}
+
+.users-list, .user-roles {
+  flex: 1;
+}
+
+.users-list ul, .user-roles ul {
+  list-style: none;
+  padding: 0;
+}
+
+.users-list li {
+  padding: 8px;
+  cursor: pointer;
+  border-bottom: 1px solid #ddd;
+}
+
+.users-list li.selected {
+  background-color: #e0e7ff;
+  font-weight: bold;
+}
+
+.user-roles ul li {
+  background: #f3f4f6;
+  margin-bottom: 6px;
+  padding: 8px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-roles ul li button {
+  background: #dc2626;
+  border: none;
+  color: white;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.user-roles ul li button:hover {
+  background: #b91c1c;
+}
+
+.assign-role {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.assign-role input {
+  flex-grow: 1;
+  padding: 6px;
+  font-size: 1rem;
+}
+
+.assign-role button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.assign-role button:hover {
+  background: #1d4ed8;
+}

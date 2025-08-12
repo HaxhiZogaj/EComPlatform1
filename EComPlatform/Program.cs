@@ -8,6 +8,11 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
 using EComPlatform.Helpers;
+using EComPlatform.Repository.Interface;
+using EComPlatform.Repository;
+using EComPlatform.Services.Interfaces;
+using EComPlatform.Services;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,6 +57,27 @@ builder.Services.AddAuthentication(options =>
 
 
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();  
+//builder.Services.AddScoped<IProductImageRepository, ProductImageRepository>();
+
+
+
+builder.Services.AddScoped<IProductService, ProductService>();
+//builder.Services.AddScoped<ICategoryService, CategoryService>();
+
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:5173") // React app address
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
 
 
 
@@ -70,6 +96,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("AllowReactApp");
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
