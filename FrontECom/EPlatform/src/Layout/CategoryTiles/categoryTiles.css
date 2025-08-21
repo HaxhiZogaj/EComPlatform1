@@ -1,0 +1,27 @@
+.category-tiles {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 2rem 0;
+  justify-content: center;
+  width: 100%;               /* ✅ fills full width */
+  max-width: 1600px;         /* ✅ matches your #root */
+  margin: 0 auto;            /* ✅ centers the container */
+}
+
+.tile {
+  flex: 1 1 200px;           /* ✅ allows tiles to grow/shrink */
+  max-width: 300px;          /* ✅ prevents them from getting too wide */
+  background-color: white;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+
+.tile:hover {
+  transform: scale(1.05);
+}

@@ -1,0 +1,82 @@
+.category-container {
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.category-container h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #2d3748;
+}
+
+.category-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.category-form input,
+.category-form textarea {
+  padding: 0.75rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.category-form button {
+  align-self: flex-start;
+  background-color: #3182ce;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.category-form button:hover {
+  background-color: #2b6cb0;
+}
+
+.category-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.category-table th,
+.category-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+}
+
+.category-table th {
+  background-color: #f7fafc;
+  color: #4a5568;
+}
+
+.category-table button {
+  margin-right: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.category-table button:first-child {
+  background-color: #38a169;
+  color: white;
+}
+
+.category-table button:last-child {
+  background-color: #e53e3e;
+  color: white;
+}
+
+.category-table button:hover {
+  opacity: 0.9;
+}

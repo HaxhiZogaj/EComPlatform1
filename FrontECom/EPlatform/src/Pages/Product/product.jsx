@@ -18,7 +18,6 @@ const ProductList = () => {
     setProducts(products.filter(p => p.productId !== id));
   };
 
-  // Pagination logic
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
@@ -47,7 +46,6 @@ const ProductList = () => {
         </div>
       )}
 
-      {/* Pagination Controls */}
       <div className="pagination-controls">
         <button disabled={currentPage === 1} onClick={() => setCurrentPage(prev => prev - 1)}>Previous</button>
         <span>Page {currentPage} of {totalPages}</span>

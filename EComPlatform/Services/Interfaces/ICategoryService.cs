@@ -3,7 +3,7 @@ using EComPlatform.ViewModels;
 
 namespace EComPlatform.Services.Interfaces
 {
-    public interface CategoryService
+    public interface ICategoryService
     {
         Task<IEnumerable<Category>> GetAllAsync();
         Task<Category> GetByIdAsync(int id);

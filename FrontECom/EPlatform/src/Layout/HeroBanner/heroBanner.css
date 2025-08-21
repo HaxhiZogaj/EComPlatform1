@@ -1,0 +1,22 @@
+.hero-banner {
+  background-image: url('https://source.unsplash.com/1600x500/?shopping,ecommerce');
+  background-size: cover;
+  background-position: center;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 100px 20px;
+  width: 100%;               /* ✅ fills full width */
+  max-width: 1600px;         /* ✅ matches your #root */
+  margin: 0 auto;            /* ✅ centers the banner */
+  border-radius: 12px;       /* optional: soft edges */
+}
+
+
+.hero-banner h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.hero-banner p {
+  font-size: 1.2rem;
+}
