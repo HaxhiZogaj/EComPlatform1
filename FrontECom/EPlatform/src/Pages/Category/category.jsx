@@ -17,16 +17,18 @@ function Category() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (editingId) {
-      await updateCategory({ categoryId: editingId, ...form });
-    } else {
-      await addCategory(form);
-    }
-    setForm({ categoryName: '', description: '' });
-    setEditingId(null);
-    fetchCategories();
-  };
+  e.preventDefault();
+  if (editingId) {
+    const payload = { categoryId: editingId, ...form };
+    await updateCategory(editingId, payload);
+  } else {
+    await addCategory(form);
+  }
+  setForm({ categoryName: '', description: '' });
+  setEditingId(null);
+  fetchCategories();
+};
+
 
   const handleEdit = (cat) => {
     setForm({ categoryName: cat.categoryName, description: cat.description });

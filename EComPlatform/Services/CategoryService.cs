@@ -56,7 +56,7 @@ namespace EComPlatform.Services
             if (category == null) return false;
 
             category.IsDeleted = true;
-            await _categoryRepo.UpdateAsync(category);
+            await _categoryRepo.RemoveAsync(category);
             return true;
         }
     }

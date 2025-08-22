@@ -7,6 +7,7 @@ import RolesPage from './Administration/RolesPage/rolesPage';
 import UsersPage from './Administration/UserPage/userPage';
 import './App.css';
 import HomePageLayout from './Layout/HomePageLayout/homePageLayout';
+import CartItem from './Pages/CartItem/cartItem';
 import Category from './Pages/Category/category';
 import Product from './Pages/Product/product';
 import ProductForm from './Pages/Product/ProductForm';
@@ -35,6 +36,8 @@ function App() {
         <Route path="/product" element={isAuthenticated ? <Product /> : <Navigate to="/login" />} />
         <Route path="/productForm" element={isAuthenticated ? <ProductForm /> : <Navigate to="/login" />} />
         <Route path="/category" element={isAuthenticated ? <Category /> : <Navigate to="/login" />} />
+       <Route path="/cartItem" element={isAuthenticated ? <CartItem /> : <Navigate to="/login" />} />
+
       </Routes>
     </Router>
   );

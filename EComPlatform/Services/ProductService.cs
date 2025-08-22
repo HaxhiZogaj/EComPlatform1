@@ -64,7 +64,7 @@ namespace EComPlatform.Services
             if (product == null) return false;
 
             product.IsDeleted = true;
-            await _productRepo.UpdateAsync(product);
+            await _productRepo.RemoveAsync(product);
             return true;
         }
     }

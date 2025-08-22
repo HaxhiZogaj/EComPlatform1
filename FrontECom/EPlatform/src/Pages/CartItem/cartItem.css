@@ -1,0 +1,21 @@
+.cartitem-container {
+  padding: 2rem;
+}
+
+.cartitem-form input {
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+
+.cartitem-table {
+  width: 100%;
+  margin-top: 2rem;
+  border-collapse: collapse;
+}
+
+.cartitem-table th,
+.cartitem-table td {
+  border: 1px solid #ccc;
+  padding: 0.75rem;
+  text-align: center;
+}
